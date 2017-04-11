@@ -28,15 +28,15 @@ Where do we start? The very first thing to do is to make sure we understand what
 
 A good way to understand something is to write it down. This way it can also be shared with others and preserved in source history. So let's write it down:
 
-'As a victim, I need a very simple way to communicate the completion of a task. So that, as stressed as I am, I am less likely to mess it up.'
+_"As a victim, I need a very simple way to communicate the completion of a task. So that, as stressed as I am, I am less likely to mess it up."_
 
 Since we’re on it, let’s also write an example of how someone would use this feature:
 
-‘Given Alice is tasked to deliver a cake to an address, when she delivers it, then she can cross this task off the list and Bob the Villain gets notified’
+_"Given Alice is tasked to deliver a cake to an address, when she delivers it, then she can cross this task off the list and Bob the Villain gets notified"_
 
-Interestingly, this little exercise revealed a detail that was missing in the original description: villain needs to be notified. Also, the ‘mess it up’ bit will still be happening. So, clearly, there is some extra work needed to make sure they can undo the task completion. This can be captured in another example:
+Interestingly, this little exercise revealed a detail that was missing in the original description: villain needs to be notified. Also, the "mess it up" bit will still be happening. So, clearly, there is some extra work needed to make sure they can undo the task completion. This can be captured in another example:
 
-‘Given Alice is tasked to deliver a cake to an address, when she accidentally marks it complete, then she can undo it and Bob the Villain gets notified both times'
+_"Given Alice is tasked to deliver a cake to an address, when she accidentally marks it complete, then she can undo it and Bob the Villain gets notified both times"_
 
 Just like that, at the cost of only few sentences (and no code at all) we’ve uncovered important changes. In a way, this is the first deliverable. We can now go back to the customer with more questions, updated estimates and more detailed list of what is going to change. And give them a chance to reevaluate before any work has started.
 
@@ -44,8 +44,27 @@ And this is why understanding the feature and documenting it is such a perfect s
 
 As useful as our little script is, there is no guarantee that at any point now or in the future our system is (still) doing what it is supposed to. If only we could somehow actually execute the script to verify the behavior.
 
-Meet [Cucumber](https://github.com/cucumber/cucumber-js) - 'a tool for running automated tests written in plain language’. There is no magic there: it just maps strings (known as steps) onto blocks of code (step definitions) and executes them in order. Cucumber is also enforcing a particular language style - called [Gherkin](https://github.com/cucumber/cucumber/wiki/Gherkin) - that helps to stay focused on features and examples (aka scenarios).
+Meet [Cucumber](https://github.com/cucumber/cucumber-js) - "a tool for running automated tests written in plain language". There is no magic there: it just maps strings (known as steps) onto blocks of code (step definitions) and executes them in order. Cucumber is also enforcing a particular language style - called [Gherkin](https://github.com/cucumber/cucumber/wiki/Gherkin) - that helps to stay focused on features and examples (aka scenarios).
 
-Cucumber is seen by many as a controversial tool. I am myself not a huge fan of the mapping bit because it is a major pain to navigate between steps and definitions. Still. Its value is greater than its flaws. It allows us to make our understanding of the system executable. Not only that, writing step definitions is naturally the next step of peeling the feature onion. Since we go one level deeper from ‘what users are trying to achieve’ to ‘how they use our system to achieve it’. Writing step definitions is going to force us to look into system's outer interfaces - UI/email for user, database for data - without too much focus on how those interfaces fit together internally.
+Cucumber is seen by many as a controversial tool. I am myself not a huge fan of the mapping bit because it is a major pain to navigate between steps and definitions. Still. Its value is greater than its flaws. It allows us to make our understanding of the system executable. Not only that, writing step definitions is naturally the next step of peeling the feature onion. Since we go one level deeper from "what users are trying to achieve" down to "how they use our system to achieve it". Writing step definitions is going to force us to look into system's outer interfaces - UI/email on one end, database on the other - without too much focus on how those interfaces fit together internally.
 
+Here goes our feature file:
 
+```
+Feature: Completing a Task
+	As a victim,
+	I need a very simple way to communicate the completion of a task.
+    So that, as stressed as I am, I am less likely to mess it up.
+    
+    Scenario: Victim completes a task
+		Given Alice is tasked to deliver a cake to an address
+        When she delivers it
+        Then she can cross this task off the list
+        And Bob the Villain gets notified
+        
+    Scenario: Victim "uncompletes" a task completed by accident
+		Given Alice is tasked to deliver a cake to an address
+        When she accidentally marks it complete
+        Then she can undo it and Bob the Villain gets notified both times
+        
+```
