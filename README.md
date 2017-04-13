@@ -46,11 +46,11 @@ As useful as our little script is, there is no guarantee that at any point now o
 
 Meet [Cucumber](https://github.com/cucumber/cucumber-js) - "a tool for running automated tests written in plain language". There is no magic there: it just maps strings (known as steps) onto blocks of code (step definitions) and executes them in order. Cucumber is also enforcing a particular language style - called [Gherkin](https://github.com/cucumber/cucumber/wiki/Gherkin) - that helps to stay focused on features and examples (aka scenarios).
 
-Cucumber is seen by many as a controversial tool. I am myself not a huge fan of the mapping bit because it is a major pain to navigate between steps and definitions. Still. Its value is greater than its flaws. It allows us to make our understanding of the system executable. Not only that, writing step definitions is naturally the next step of peeling the feature onion. Since we go one level deeper from "what users are trying to achieve" down to "how they use our system to achieve it". Writing step definitions is going to force us to look into system's outer interfaces - UI/email on one end, database on the other - without too much focus on how those interfaces fit together internally.
+Cucumber is seen by many as a controversial tool. Loose grammar leads to disagreement on feature style, mapping strings to code via regular exressions makes it hard to navigate from feature files to steps definitions. Still. Its value is greater than its flaws. It allows us to make our understanding of the system executable. Not only that, writing step definitions is naturally the next step of peeling the feature onion. Since we go one level deeper from "what users are trying to achieve" down to "how they use our system to achieve it". Writing step definitions is going to force us to look into the system's outer interfaces - UI on one end, database on the other - without too much focus on how those interfaces fit together internally.
 
-Here goes our feature file:
+Anyway. Our thoughtwork looks right at home in a cucumber feature file:
 
-```
+```cucumber
 Feature: Completing a Task
   As a victim,
   I need a very simple way to communicate the completion of a task.
@@ -68,3 +68,4 @@ Feature: Completing a Task
     Then she can undo it and Bob the Villain gets notified both times
         
 ```
+
