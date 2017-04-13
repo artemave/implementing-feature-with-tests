@@ -69,3 +69,15 @@ Feature: Completing a Task
         
 ```
 
+Next, I am going to start implementing the first scenario up until the point where it hits some functionality that doesn't exist yet (remember: we're adding a feauture to an existing system, so some of the things we rely on are already there).
+
+Speaking of the existing project, [here is the repo](../..). The above change went in its own [commit](9d38e2aeba0819cbe4b9328ff4e039c9fcd99cac), so if you check it out and run
+
+```
+yarn install
+yarn test -- features/complete_task.feature
+```
+
+You should see a failure that basically means `Can't find a checkbox to tick`. Which is expected, as this doesn't exist yet.
+
+A word on tooling: there is lots going on there. Some of it is really cool and interesting and I am going to talk about it in great details later in the post, but doing it now is most certainly going to distract us from the flow. So stay tuned.
