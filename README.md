@@ -66,12 +66,10 @@ Feature: Completing a Task
     Given Alice is tasked to deliver a cake to an address
     When she accidentally marks it complete
     Then she can undo it and Bob the Villain gets notified both times
-        
 ```
 
-Next, I am going to start implementing the first scenario up until the point where it hits some functionality that doesn't exist yet (remember: we're adding a feauture to an existing system, so some of the things we rely on are already there).
-
-Speaking of the existing project, [here is the repo](../..). The above change went in its own [commit](9d38e2aeba0819cbe4b9328ff4e039c9fcd99cac), so if you check it out and run
+Writing step definitions (automation code) for the first scenario forces us to think of the UX. After discussing with the client, we settle on a checkbox and a confirmation message once its checked.
+This, along with the feature file, makes our first [commit](9d38e2aeba0819cbe4b9328ff4e039c9fcd99cac). If you check it out and run
 
 ```
 yarn install
@@ -80,4 +78,4 @@ yarn test -- features/complete_task.feature
 
 You should see a failure that basically means `Can't find a checkbox to tick`. Which is expected, as this doesn't exist yet.
 
-A word on tooling: there is lots going on there. Some of it is really cool and interesting and I am going to talk about it in great details later in the post, but doing it now is most certainly going to distract us from the flow. So stay tuned.
+A word on tools used in this project: there is lots going on there. Some of it is really cool and interesting and I am going to talk about it in great detail later in the post, but doing it now is going to distract us from the flow. So stay tuned.
