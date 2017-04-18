@@ -68,7 +68,7 @@ Feature: Completing a Task
     Then she can undo it and Bob the Villain gets notified both times
 ```
 
-Writing step definitions (automation code) for the first scenario forces us to think of the UX. After discussing with the client, we settle on a checkbox and a confirmation message once its checked.
+Writing step definitions for the first scenario forces us to think of the UX. After discussing with the client, we settle on a checkbox and a confirmation message once its checked.
 This, along with the feature file, makes our first [commit](9d38e2aeba0819cbe4b9328ff4e039c9fcd99cac). If you check it out and run
 
 ```
@@ -78,4 +78,5 @@ yarn test -- features/complete_task.feature
 
 You should see a failure that basically means `Can't find a checkbox to tick`. Which is expected, as this doesn't exist yet.
 
-A word on tools used in this project: there is lots going on there. Some of it is really cool and interesting and I am going to talk about it in great detail later in the post, but doing it now is going to distract us from the flow. So stay tuned.
+The tools used on this project may not look familiar. But, that is ok. I am delibirately focusing on the flow for now, leaving the tools that support it for later.
+
