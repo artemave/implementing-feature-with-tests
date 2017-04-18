@@ -22,6 +22,13 @@ class Db {
     ])
   }
 
+  dropSchema () {
+    return Promise.all([
+      this.db.query('drop table if exists tasks'),
+      this.db.query('drop table if exists task_lists'),
+    ])
+  }
+
   tasks (taskListId) {
     return this.task.query('select * from tasks where task_list_id = @id', {
       id: taskListId,
