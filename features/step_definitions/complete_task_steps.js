@@ -23,18 +23,15 @@ defineSupportCode(function ({Given, When, Then}) {
   Then('she can cross this task off the list', async function () {
     this.page = navigateTo(`http://localhost:${this.port}/${this.taskListId}`)
 
-    await this.page
+    const taskToggle = this.page
       .find('li', {text: 'Deliver a cake'})
       .find('input[type="checkbox"]')
-      .click()
 
+    await taskToggle.click()
     await this.page.shouldHave({text: 'Done!'})
 
-    reloadPage(this.page)
-
-    await this.page
-      .find('li', {text: 'Deliver a cake'})
-      .shouldHave({checked: true})
+    await reloadPage(this.page)
+    await taskToggle.shouldHave({checked: true})
   })
 
   Then('Bob the Villain gets notified', function (callback) {

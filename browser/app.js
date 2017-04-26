@@ -1,6 +1,6 @@
 const hyperdom = require('hyperdom')
 const router = require('hyperdom-router')
-const httpism = require('httpism')
+const api = require('httpism')
 const h = hyperdom.html
 
 class App {
@@ -11,30 +11,51 @@ class App {
     router.start()
   }
 
+  async completeTask (task) {
+    await api.post(`/tasks/${task.id}/complete`)
+    this.showFlash('Done!')
+  }
+
+  showFlash (msg) {
+    this.flash = msg
+    setTimeout(
+      () => {
+        this.flash = ''
+        this.refresh()
+      },
+      2000
+    )
+  }
+
   renderTasks () {
-    if (this.tasks) {
-      return h(
-        'ul',
-        this.tasks.map(task => {
-          return h('li', task.text)
-        })
-      )
-    } else {
-      return h('div', 'Loading...')
-    }
+    return h(
+      'ul',
+      this.tasks.map(task => {
+        return h(
+          'li',
+          task.text,
+          h('input', {
+            type: 'checkbox',
+            binding: [task, 'isComplete'],
+            onchange: () => this.completeTask(task),
+          })
+        )
+      })
+    )
   }
 
   async loadTasks (taskListId) {
-    this.tasks = (await httpism.get(`/taskList/${taskListId}/tasks`)).body
+    this.tasks = (await api.get(`/taskList/${taskListId}/tasks`)).body
   }
 
   render () {
     return h(
-      'div',
+      'main',
       this.routes.taskList(
         {onarrival: params => this.loadTasks(params.taskListId)},
-        () => this.renderTasks()
-      )
+        () => this.tasks ? this.renderTasks() : h('div', 'Loading...')
+      ),
+      h('div.flash', this.flash)
     )
   }
 }

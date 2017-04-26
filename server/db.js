@@ -18,9 +18,11 @@ class Db {
   createSchema () {
     return Promise.all([
       this.db.query(
-        'create table tasks (id integer, task_list_id integer, text text)'
+        'create table tasks (id integer not null primary key, task_list_id integer, text text, isComplete text)'
       ),
-      this.db.query('create table task_lists (id integer)'),
+      this.db.query(
+        'create table task_lists (id integer not null primary key)'
+      ),
     ])
   }
 
@@ -38,6 +40,16 @@ class Db {
         id: taskListId,
       }
     )
+  }
+
+  async task (taskId) {
+    const task = (await this.schema.task.query(
+      'select * from tasks where id = @id',
+      {
+        id: taskId,
+      }
+    ))[0]
+    return task
   }
 }
 

@@ -8,6 +8,11 @@ module.exports = {
   },
 
   reloadPage (page) {
-    page._selector.contentWindow.location.reload()
+    return new Promise((resolve, reject) => {
+      const iframe = page._selector
+
+      iframe.addEventListener('load', resolve, {once: true})
+      iframe.contentWindow.location.reload()
+    })
   },
 }

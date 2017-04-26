@@ -8,9 +8,25 @@ module.exports = function (
   const app = express()
 
   app.get('/taskList/:id/tasks', function (req, res) {
-    return db.tasks(req.params.id).then(tasks => {
+    db.tasks(req.params.id).then(tasks => {
       res.send(tasks)
     })
+  })
+
+  app.post('/tasks/:id/complete', function (req, res) {
+    db
+      .task(req.params.id)
+      .then(task => {
+        task.isComplete = true
+        return task.save()
+      })
+      .then(() => {
+        res.end()
+      })
+      .catch(e => {
+        console.log(e)
+        res.status(500).end()
+      })
   })
 
   app.get(
