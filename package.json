@@ -2,8 +2,10 @@
   "name": "implementing-feature-with-tests",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon --exec node server/app.js",
-    "test": "electron-rebuild && cucumber-electron",
+    "postinstall": "electron-rebuild",
+    "start": "node server/app.js",
+    "dev": "node features/support/createTestDb.js && nodemon --exec node server/app.js",
+    "test": "cucumber-electron",
     "test-debug": "electron-rebuild && cucumber-electron --electron-debug"
   },
   "repository": "git@github.com:artemave/implementing-feature-with-tests.git",
@@ -11,7 +13,8 @@
   "license": "MIT",
   "devDependencies": {
     "browser-monkey": "^2.5.0",
-    "cucumber-electron": "artemave/cucumber-electron",
+    "cucumber-electron": "artemave/cucumber-electron#dont-bundle-electron",
+    "electron": "beta",
     "electron-rebuild": "^1.5.7",
     "nodemon": "^1.11.0",
     "prettier-standard": "^3.0.1"
