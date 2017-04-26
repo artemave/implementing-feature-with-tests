@@ -3,10 +3,10 @@ const {navigateTo, reloadPage} = require('../support/pageHelpers')
 
 defineSupportCode(function ({Given, When, Then}) {
   Given('Alice is tasked to deliver a cake to an address', async function () {
-    const taskList = this.db.taskList({
+    const taskList = this.db.schema.taskList({
       tasks: task_list => {
         return [
-          this.db.task({
+          this.db.schema.task({
             task_list,
             text: 'Deliver a cake',
           }),

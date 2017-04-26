@@ -9,8 +9,10 @@ class Db {
       },
     })
 
-    this.taskList = this.db.model({table: 'task_lists'})
-    this.task = this.db.model({table: 'tasks'})
+    this.schema = {
+      taskList: this.db.model({table: 'task_lists'}),
+      task: this.db.model({table: 'tasks'}),
+    }
   }
 
   createSchema () {
@@ -30,9 +32,12 @@ class Db {
   }
 
   tasks (taskListId) {
-    return this.task.query('select * from tasks where task_list_id = @id', {
-      id: taskListId,
-    })
+    return this.schema.task.query(
+      'select * from tasks where task_list_id = @id',
+      {
+        id: taskListId,
+      }
+    )
   }
 }
 
