@@ -69,7 +69,7 @@ Feature: Completing a Task
 ```
 
 Writing step definitions for the first scenario forces us to think of the UX. After discussing with the client, we settle on a checkbox and a confirmation message once its checked.
-This, along with the feature file, makes our first [commit](9d38e2aeba0819cbe4b9328ff4e039c9fcd99cac). If you check it out and run
+This, along with the feature file, makes our first [commit](../../commit/9d38e2aeba0819cbe4b9328ff4e039c9fcd99cac). If you check it out and run
 
 ```
 yarn install
@@ -78,5 +78,5 @@ yarn test -- features/complete_task.feature
 
 You should see a failure that basically means `Can't find a checkbox to tick`. Which is expected, as this doesn't exist yet.
 
-The tools used on this project may not look familiar. But, that is ok. I am delibirately focusing on the flow for now, leaving the tools that support it for later.
+A word on the tools used on this project. Them may not look familiar, but that is ok. I am delibirately focusing on the flow for now, leaving the tools that support it for later.
 
