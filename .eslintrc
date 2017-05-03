@@ -1,4 +1,5 @@
 {
+  "extends": "standard",
   "parserOptions": {
     "ecmaVersion": 8
   },
@@ -6,14 +7,5 @@
     "browser": true,
     "node": true,
     "es6": true
-  },
-  "rules": {
-    "no-unused-vars": ["warn"],
-    "no-undef": ["error"],
-    "comma-dangle": ["error", {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "functions": "never"
-    }]
   }
 }

@@ -14,15 +14,15 @@ if (!module.parent) {
         return [
           db.schema.task({
             task_list,
-            text: 'Deliver a cake',
+            text: 'Deliver a cake'
           }),
           db.schema.task({
             task_list,
             isComplete: true,
-            text: 'Rob a bank',
-          }),
+            text: 'Rob a bank'
+          })
         ]
-      },
+      }
     })
 
     taskList.save()

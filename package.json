@@ -5,8 +5,18 @@
     "postinstall": "electron-rebuild",
     "start": "node server/app.js",
     "dev": "node features/support/createTestDb.js && nodemon --exec node server/app.js",
+    "precommit": "lint-staged",
+    "eslint": "eslint $(git ls-files | grep -E '.js$')",
     "test": "cucumber-electron",
-    "test-debug": "electron-rebuild && cucumber-electron --electron-debug"
+    "test-debug": "cucumber-electron --electron-debug"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.js": [
+        "prettier-standard",
+        "git add"
+      ]
+    }
   },
   "repository": "git@github.com:artemave/implementing-feature-with-tests.git",
   "author": "artemave <artemave@gmail.com>",
@@ -14,8 +24,16 @@
   "devDependencies": {
     "browser-monkey": "^2.5.0",
     "cucumber-electron": "artemave/cucumber-electron#dont-bundle-electron",
-    "electron": "beta",
+    "electron": "^1.6.6",
     "electron-rebuild": "^1.5.7",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.13.3",
+    "lint-staged": "^3.4.1",
     "nodemon": "^1.11.0",
     "prettier-standard": "^3.0.1"
   },

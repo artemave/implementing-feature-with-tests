@@ -5,13 +5,13 @@ class Db {
     this.db = sworm.db({
       driver: 'sqlite',
       config: {
-        filename: dbPath,
-      },
+        filename: dbPath
+      }
     })
 
     this.schema = {
       taskList: this.db.model({table: 'task_lists'}),
-      task: this.db.model({table: 'tasks'}),
+      task: this.db.model({table: 'tasks'})
     }
   }
 
@@ -20,16 +20,14 @@ class Db {
       this.db.query(
         'create table tasks (id integer not null primary key, task_list_id integer, text text, isComplete text)'
       ),
-      this.db.query(
-        'create table task_lists (id integer not null primary key)'
-      ),
+      this.db.query('create table task_lists (id integer not null primary key)')
     ])
   }
 
   dropSchema () {
     return Promise.all([
       this.db.query('drop table if exists tasks'),
-      this.db.query('drop table if exists task_lists'),
+      this.db.query('drop table if exists task_lists')
     ])
   }
 
@@ -37,7 +35,7 @@ class Db {
     return this.schema.task.query(
       'select * from tasks where task_list_id = @id',
       {
-        id: taskListId,
+        id: taskListId
       }
     )
   }
@@ -46,7 +44,7 @@ class Db {
     const task = (await this.schema.task.query(
       'select * from tasks where id = @id',
       {
-        id: taskId,
+        id: taskId
       }
     ))[0]
     return task

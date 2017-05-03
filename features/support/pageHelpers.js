@@ -14,5 +14,5 @@ module.exports = {
       iframe.addEventListener('load', resolve, {once: true})
       iframe.contentWindow.location.reload()
     })
-  },
+  }
 }

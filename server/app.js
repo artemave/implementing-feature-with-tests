@@ -32,7 +32,7 @@ module.exports = function (
   app.get(
     '/bundle.js',
     browserify('browser/index.js', {
-      transform: ['babelify'],
+      transform: ['babelify']
     })
   )
 

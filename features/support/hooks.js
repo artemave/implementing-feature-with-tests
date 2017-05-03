@@ -8,7 +8,7 @@ defineSupportCode(function ({Before, After}) {
 
     this.port = 8753
     this.server = createServerApp({
-      db: this.db,
+      db: this.db
     }).listen(this.port)
   })
 

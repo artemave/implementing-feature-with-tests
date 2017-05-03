@@ -8,14 +8,14 @@ defineSupportCode(function ({Given, When, Then}) {
         return [
           this.db.schema.task({
             task_list,
-            text: 'Deliver a cake',
+            text: 'Deliver a cake'
           }),
           this.db.schema.task({
             task_list,
-            text: 'Rob a bank',
-          }),
+            text: 'Rob a bank'
+          })
         ]
-      },
+      }
     })
 
     await taskList.save()

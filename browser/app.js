@@ -3,10 +3,10 @@ const router = require('hyperdom-router')
 const api = require('httpism')
 const h = hyperdom.html
 
-class App {
+module.exports = class App {
   constructor () {
     this.routes = {
-      taskList: router.route('/:taskListId'),
+      taskList: router.route('/:taskListId')
     }
     router.start()
   }
@@ -37,7 +37,7 @@ class App {
           h('input', {
             type: 'checkbox',
             binding: [task, 'isComplete'],
-            onchange: () => this.completeTask(task),
+            onchange: () => this.completeTask(task)
           })
         )
       })
@@ -59,5 +59,3 @@ class App {
     )
   }
 }
-
-module.exports = App
