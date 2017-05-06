@@ -1,16 +1,13 @@
 const hyperdom = require('hyperdom')
-const router = require('hyperdom-router')
+const router = require('hyperdom/router')
 const api = require('httpism')
 const h = hyperdom.html
 
-module.exports = class App {
-  constructor () {
-    this.routes = {
-      taskList: router.route('/:taskListId')
-    }
-    router.start()
-  }
+const routes = {
+  taskList: router.route('/:taskListId')
+}
 
+module.exports = class App {
   async completeTask (task) {
     await api.post(`/tasks/${task.id}/complete`)
     this.showFlash('Done!')
@@ -45,17 +42,19 @@ module.exports = class App {
   }
 
   async loadTasks (taskListId) {
-    this.tasks = (await api.get(`/taskList/${taskListId}/tasks`)).body
+    this.tasks = await api.get(`/taskList/${taskListId}/tasks`)
   }
 
-  render () {
-    return h(
-      'main',
-      this.routes.taskList(
-        {onarrival: params => this.loadTasks(params.taskListId)},
-        () => this.tasks ? this.renderTasks() : h('div', 'Loading...')
-      ),
-      h('div.flash', this.flash)
-    )
+  routes () {
+    return [
+      routes.taskList({
+        onload: params => this.loadTasks(params.taskListId),
+        render: () => this.tasks ? this.renderTasks() : h('div', 'Loading...')
+      })
+    ]
+  }
+
+  render (content) {
+    return h('main', content, h('div.flash', this.flash))
   }
 }

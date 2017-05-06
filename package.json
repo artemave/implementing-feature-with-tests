@@ -23,7 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "browser-monkey": "^2.5.0",
-    "cucumber-electron": "artemave/cucumber-electron#dont-bundle-electron",
+    "cucumber-electron": "^2.2.0",
     "electron": "^1.6.6",
     "electron-rebuild": "^1.5.7",
     "eslint": "^3.19.0",
@@ -42,9 +42,8 @@
     "browserify": "^14.3.0",
     "browserify-middleware": "^7.1.0",
     "express": "^4.15.2",
-    "httpism": "^2.7.0",
-    "hyperdom": "^0.5.0",
-    "hyperdom-router": "^2.18.0",
+    "httpism": "^3.0.0",
+    "hyperdom": "^0.6.0",
     "sqlite3": "^3.1.8",
     "sworm": "^3.6.0"
   }
